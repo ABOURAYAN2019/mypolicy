@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inspection Caillebotis et Accès</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input[type="text"], select, textarea {
+            width: 95%;
+            padding: 5px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        .submit-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #1976D2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .submit-btn:hover {
+            background-color: #0D47A1;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Formulaire d'Inspection - Caillebotis et Accès</h2>
+
+<form action="traitement.php" method="post">
+
+    <label>Site :</label> <input type="text" name="site" required><br><br>
+    <label>Date :</label> <input type="date" name="date" required><br><br>
+    <label>Zone générale :</label> <input type="text" name="zone_generale" required><br><br>
+    <label>Inspecteur :</label> <input type="text" name="inspecteur" required><br><br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>N°</th>
+                <th>Élément Inspecté</th>
+                <th>Point de Contrôle</th>
+                <th>Conforme</th>
+                <th>Non Conforme</th>
+                <th>Zone spécifique</th>
+                <th>Remarque / Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        <!-- Début des 20 points -->
+        <tr><td>1</td><td>Caillebotis</td><td>Propreté</td><td><input type="radio" name="point1" value="Conforme" required></td><td><input type="radio" name="point1" value="Non Conforme"></td><td><input type="text" name="zone1"></td><td><textarea name="remarque1" rows="2"></textarea></td></tr>
+        <tr><td>2</td><td>Caillebotis</td><td>Absence de corrosion (dessus)</td><td><input type="radio" name="point2" value="Conforme" required></td><td><input type="radio" name="point2" value="Non Conforme"></td><td><input type="text" name="zone2"></td><td><textarea name="remarque2" rows="2"></textarea></td></tr>
+        <tr><td>3</td><td>Caillebotis</td><td>Absence de déformation (dessus)</td><td><input type="radio" name="point3" value="Conforme" required></td><td><input type="radio" name="point3" value="Non Conforme"></td><td><input type="text" name="zone3"></td><td><textarea name="remarque3" rows="2"></textarea></td></tr>
+        <tr><td>4</td><td>Caillebotis</td><td>Absence de corrosion (dessous)</td><td><input type="radio" name="point4" value="Conforme" required></td><td><input type="radio" name="point4" value="Non Conforme"></td><td><input type="text" name="zone4"></td><td><textarea name="remarque4" rows="2"></textarea></td></tr>
+        <tr><td>5</td><td>Caillebotis</td><td>Absence de déformation (dessous)</td><td><input type="radio" name="point5" value="Conforme" required></td><td><input type="radio" name="point5" value="Non Conforme"></td><td><input type="text" name="zone5"></td><td><textarea name="remarque5" rows="2"></textarea></td></tr>
+        <tr><td>6</td><td>Fixations</td><td>Nombre d'attaches suffisant (4/m²)</td><td><input type="radio" name="point6" value="Conforme" required></td><td><input type="radio" name="point6" value="Non Conforme"></td><td><input type="text" name="zone6"></td><td><textarea name="remarque6" rows="2"></textarea></td></tr>
+        <tr><td>7</td><td>Fixations</td><td>Position correcte (aux extrémités)</td><td><input type="radio" name="point7" value="Conforme" required></td><td><input type="radio" name="point7" value="Non Conforme"></td><td><input type="text" name="zone7"></td><td><textarea name="remarque7" rows="2"></textarea></td></tr>
+        <tr><td>8</td><td>Fixations</td><td>Qualité de serrage</td><td><input type="radio" name="point8" value="Conforme" required></td><td><input type="radio" name="point8" value="Non Conforme"></td><td><input type="text" name="zone8"></td><td><textarea name="remarque8" rows="2"></textarea></td></tr>
+        <tr><td>9</td><td>Fixations</td><td>Absence de corrosion sur attaches</td><td><input type="radio" name="point9" value="Conforme" required></td><td><input type="radio" name="point9" value="Non Conforme"></td><td><input type="text" name="zone9"></td><td><textarea name="remarque9" rows="2"></textarea></td></tr>
+        <tr><td>10</td><td>Garde-corps</td><td>Dimensions conformes</td><td><input type="radio" name="point10" value="Conforme" required></td><td><input type="radio" name="point10" value="Non Conforme"></td><td><input type="text" name="zone10"></td><td><textarea name="remarque10" rows="2"></textarea></td></tr>
+        <tr><td>11</td><td>Garde-corps</td><td>Absence de corrosion</td><td><input type="radio" name="point11" value="Conforme" required></td><td><input type="radio" name="point11" value="Non Conforme"></td><td><input type="text" name="zone11"></td><td><textarea name="remarque11" rows="2"></textarea></td></tr>
+        <tr><td>12</td><td>Garde-corps</td><td>Absence de déformation / détachement</td><td><input type="radio" name="point12" value="Conforme" required></td><td><input type="radio" name="point12" value="Non Conforme"></td><td><input type="text" name="zone12"></td><td><textarea name="remarque12" rows="2"></textarea></td></tr>
+        <tr><td>13</td><td>Échelles</td><td>Présence des chaînettes / portillons</td><td><input type="radio" name="point13" value="Conforme" required></td><td><input type="radio" name="point13" value="Non Conforme"></td><td><input type="text" name="zone13"></td><td><textarea name="remarque13" rows="2"></textarea></td></tr>
+        <tr><td>14</td><td>Échelles</td><td>Absence de corrosion</td><td><input type="radio" name="point14" value="Conforme" required></td><td><input type="radio" name="point14" value="Non Conforme"></td><td><input type="text" name="zone14"></td><td><textarea name="remarque14" rows="2"></textarea></td></tr>
+        <tr><td>15</td><td>Échelles</td><td>Absence de déformation / détachement</td><td><input type="radio" name="point15" value="Conforme" required></td><td><input type="radio" name="point15" value="Non Conforme"></td><td><input type="text" name="zone15"></td><td><textarea name="remarque15" rows="2"></textarea></td></tr>
+        <tr><td>16</td><td>Escaliers</td><td>Marches complètes, pas de déformation</td><td><input type="radio" name="point16" value="Conforme" required></td><td><input type="radio" name="point16" value="Non Conforme"></td><td><input type="text" name="zone16"></td><td><textarea name="remarque16" rows="2"></textarea></td></tr>
+        <tr><td>17</td><td>Escaliers</td><td>Pas de corrosion sur marches</td><td><input type="radio" name="point17" value="Conforme" required></td><td><input type="radio" name="point17" value="Non Conforme"></td><td><input type="text" name="zone17"></td><td><textarea name="remarque17" rows="2"></textarea></td></tr>
+        <tr><td>18</td><td>Escaliers</td><td>Distance régulière entre marches</td><td><input type="radio" name="point18" value="Conforme" required></td><td><input type="radio" name="point18" value="Non Conforme"></td><td><input type="text" name="zone18"></td><td><textarea name="remarque18" rows="2"></textarea></td></tr>
+        <tr><td>19</td><td>Structure</td><td>Bon état du fer en U</td><td><input type="radio" name="point19" value="Conforme" required></td><td><input type="radio" name="point19" value="Non Conforme"></td><td><input type="text" name="zone19"></td><td><textarea name="remarque19" rows="2"></textarea></td></tr>
+        <tr><td>20</td><td>Structure</td><td>Contreventement présent et conforme</td><td><input type="radio" name="point20" value="Conforme" required></td><td><input type="radio" name="point20" value="Non Conforme"></td><td><input type="text" name="zone20"></td><td><textarea name="remarque20" rows="2"></textarea></td></tr>
+
+        </tbody>
+    </table>
+
+    <button type="submit" class="submit-btn">Envoyer Inspection</button>
+
+</form>
+
+</body>
+</html>
