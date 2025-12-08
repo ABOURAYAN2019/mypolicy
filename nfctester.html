@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NFC Tester - Card Reader</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        color: #333;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+      }
+
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      .offline-badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        margin-top: 10px;
+      }
+
+      .content {
+        padding: 30px 20px;
+      }
+
+      .info-box {
+        background: #f0f4ff;
+        border-left: 4px solid #667eea;
+        padding: 15px;
+        margin-bottom: 25px;
+        border-radius: 5px;
+      }
+
+      .info-box h3 {
+        color: #667eea;
+        margin-bottom: 8px;
+      }
+
+      .control-section {
+        margin-bottom: 30px;
+      }
+
+      .control-section h2 {
+        color: #667eea;
+        font-size: 20px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+      }
+
+      .control-section h2::before {
+        content: "";
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background: #667eea;
+        color: white;
+        border-radius: 50%;
+        margin-right: 10px;
+        font-weight: bold;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      button {
+        flex: 1;
+        min-width: 140px;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-primary:active {
+        transform: translateY(0);
+      }
+
+      .btn-secondary {
+        background: #f0f0f0;
+        color: #333;
+        border: 2px solid #ddd;
+      }
+
+      .btn-secondary:hover {
+        background: #e8e8e8;
+        border-color: #667eea;
+      }
+
+      .btn-danger {
+        background: #ff6b6b;
+        color: white;
+      }
+
+      .btn-danger:hover {
+        background: #ee5a52;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+      }
+
+      .status-display {
+        background: #f9f9f9;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        min-height: 100px;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        overflow-y: auto;
+        max-height: 300px;
+      }
+
+      .status-display.active {
+        border-color: #667eea;
+        background: #f0f4ff;
+      }
+
+      .status-item {
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .status-item:last-child {
+        border-bottom: none;
+      }
+
+      .label {
+        font-weight: 600;
+        color: #667eea;
+        min-width: 120px;
+      }
+
+      .value {
+        color: #333;
+        word-break: break-all;
+        text-align: right;
+        flex: 1;
+      }
+
+      .nfc-simulator {
+        background: #fff3cd;
+        border: 2px dashed #ffc107;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .nfc-simulator h3 {
+        color: #856404;
+        margin-bottom: 10px;
+      }
+
+      .simulation-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 15px;
+      }
+
+      .simulation-buttons button {
+        min-width: 120px;
+      }
+
+      .tech-list {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .tech-list li {
+        padding: 8px 12px;
+        background: #f5f5f5;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        border-left: 3px solid #667eea;
+      }
+
+      .dev-info {
+        background: #e8f5e9;
+        border-left: 4px solid #4caf50;
+        padding: 15px;
+        margin-top: 30px;
+        border-radius: 5px;
+      }
+
+      .dev-info h3 {
+        color: #2e7d32;
+        margin-bottom: 10px;
+      }
+
+      .dev-info p {
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+
+      .dev-info a {
+        color: #667eea;
+        text-decoration: none;
+      }
+
+      .dev-info a:hover {
+        text-decoration: underline;
+      }
+
+      .feature-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .feature-item {
+        background: #f0f4ff;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 3px solid #667eea;
+      }
+
+      .feature-item h4 {
+        color: #667eea;
+        margin-bottom: 5px;
+      }
+
+      .feature-item p {
+        font-size: 13px;
+        color: #555;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          border-radius: 10px;
+        }
+
+        header h1 {
+          font-size: 22px;
+        }
+
+        .button-group {
+          flex-direction: column;
+        }
+
+        button {
+          min-width: 100%;
+        }
+
+        .feature-list {
+          grid-template-columns: 1fr;
+        }
+
+        .status-item {
+          flex-direction: column;
+        }
+
+        .label {
+          margin-bottom: 5px;
+        }
+      }
+
+      .success-message {
+        color: #4caf50;
+        font-weight: 600;
+      }
+
+      .error-message {
+        color: #f44336;
+        font-weight: 600;
+      }
+
+      .warning-message {
+        color: #ff9800;
+        font-weight: 600;
+      }
+
+      .timestamp {
+        font-size: 11px;
+        color: #999;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <h1>📱 NFC Tester</h1>
+        <p>Offline NFC Card Reader & Public Data Analyzer</p>
+        <div class="offline-badge">✓ 100% Offline - No Connection Required</div>
+      </header>
+
+      <div class="content">
+        <!-- Developer Info -->
+        <div class="dev-info">
+          <h3>👨‍💻 Developer Information</h3>
+          <p><strong>Developer Name:</strong> MoroccoDiy</p>
+          <p>
+            <strong>Email:</strong>
+            <a href="mailto:moroccodiy@gmail.com">moroccodiy@gmail.com</a>
+          </p>
+          <p>
+            <strong>Website:</strong>
+            <a href="https://abourayan2019.github.io/mypolicy/"
+              >https://abourayan2019.github.io/mypolicy/</a
+            >
+          </p>
+        </div>
+
+        <!-- App Features -->
+        <div class="control-section">
+          <h2>Features</h2>
+          <div class="feature-list">
+            <div class="feature-item">
+              <h4>📡 NFC Detection</h4>
+              <p>Detect and read NFC cards within range</p>
+            </div>
+            <div class="feature-item">
+              <h4>📊 Data Analysis</h4>
+              <p>Extract and display card public data</p>
+            </div>
+            <div class="feature-item">
+              <h4>🔍 Card Info</h4>
+              <p>View technical specifications</p>
+            </div>
+            <div class="feature-item">
+              <h4>💾 Offline Mode</h4>
+              <p>Works completely offline</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- NFC Status Information -->
+        <div class="info-box">
+          <h3>ℹ️ About This App</h3>
+          <p>
+            NFC Tester is a lightweight offline tool designed to detect and read
+            NFC card data. The app reads publicly accessible information from
+            NFC cards without storing any data on external servers. All
+            processing happens locally on your device.
+          </p>
+        </div>
+
+        <!-- NFC Simulator Section -->
+        <div class="control-section">
+          <h2>NFC Simulator</h2>
+          <div class="nfc-simulator">
+            <h3>🎯 Test Mode - Simulate Card Data</h3>
+            <p style="font-size: 13px; margin-bottom: 10px">
+              Use these buttons to simulate NFC card detection for testing
+              purposes
+            </p>
+            <div class="simulation-buttons">
+              <button class="btn-primary" onclick="simulateNFCType2()">
+                Type 2 Card
+              </button>
+              <button class="btn-primary" onclick="simulateNFCType4()">
+                Type 4 Card
+              </button>
+              <button class="btn-primary" onclick="simulateNFCType5()">
+                Type 5 Card
+              </button>
+              <button class="btn-secondary" onclick="simulateEmptyCard()">
+                Empty Card
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- NFC Control Section -->
+        <div class="control-section">
+          <h2>Card Reader</h2>
+          <div class="button-group">
+            <button class="btn-primary" onclick="startNFCScanning()">
+              🔍 Start Scanning
+            </button>
+            <button class="btn-secondary" onclick="stopNFCScanning()">
+              ⏸ Stop Scanning
+            </button>
+            <button class="btn-danger" onclick="clearDisplay()">
+              🗑 Clear Data
+            </button>
+          </div>
+        </div>
+
+        <!-- Status Display -->
+        <div class="control-section">
+          <h2>Card Data Display</h2>
+          <div class="status-display" id="statusDisplay">
+            <div class="status-item">
+              <span class="label">Status:</span>
+              <span class="value warning-message">Waiting for card...</span>
+            </div>
+            <div class="status-item">
+              <span class="label">Ready:</span>
+              <span class="value">✓ Yes</span>
+            </div>
+            <div class="status-item">
+              <span class="label">Offline Mode:</span>
+              <span class="value success-message">✓ Active</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detected Technologies -->
+        <div class="control-section">
+          <h2>Supported NFC Types</h2>
+          <ul class="tech-list">
+            <li>📌 Type 1 (Topaz) - 96-412 bytes</li>
+            <li>📌 Type 2 (Mifare Ultralight) - 64-180 bytes</li>
+            <li>📌 Type 3 (Felica) - Up to 2KB</li>
+            <li>📌 Type 4 (ISO-DEP) - Larger capacity</li>
+            <li>📌 Type 5 (ISO15693) - Long range</li>
+            <li>💡 NDEF Format - Text, URLs, Contact data</li>
+          </ul>
+        </div>
+
+        <!-- Technical Details -->
+        <div class="control-section">
+          <h2>Technical Information</h2>
+          <div class="info-box">
+            <h3>Data Processing</h3>
+            <p>
+              <strong>Read Mode:</strong> Public data only - Private/secure
+              sectors are not accessed
+            </p>
+            <p style="margin-top: 10px">
+              <strong>Storage:</strong> No data is stored, transmitted, or
+              synced. All operations are instantaneous and local.
+            </p>
+            <p style="margin-top: 10px">
+              <strong>Privacy:</strong> This tool respects user privacy. It does
+              not collect, save, or transmit any information.
+            </p>
+          </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="control-section">
+          <h2>Troubleshooting</h2>
+          <div class="info-box">
+            <h3>Common Issues</h3>
+            <ul style="padding-left: 20px; margin-top: 10px">
+              <li>
+                <strong>Card not detected:</strong> Ensure NFC is enabled on
+                your device and hold the card near the reader
+              </li>
+              <li>
+                <strong>Empty card data:</strong> Some cards may have no public
+                data or NDEF messages
+              </li>
+              <li>
+                <strong>Connection issues:</strong> This app works completely
+                offline - no internet required
+              </li>
+              <li>
+                <strong>Browser support:</strong> Ensure your browser supports
+                the Web NFC API
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let nfcScanning = false;
+
+      // Start NFC Scanning
+      async function startNFCScanning() {
+        if (!("NDEFReader" in window)) {
+          updateDisplay(
+            "error",
+            "NFC not supported",
+            "This browser does not support Web NFC API"
+          );
+          return;
+        }
+
+        nfcScanning = true;
+        updateDisplay(
+          "warning",
+          "Scanning...",
+          "Bring your NFC card close to the device"
+        );
+
+        try {
+          const ndef = new NDEFReader();
+          await ndef.scan();
+
+          ndef.onreading = (event) => {
+            handleNFCReading(event);
+          };
+
+          ndef.onreadingerror = () => {
+            updateDisplay(
+              "error",
+              "Read Error",
+              "Unable to read card data. Try again."
+            );
+          };
+        } catch (error) {
+          updateDisplay(
+            "error",
+            "Scan Error",
+            `${error.message || "Failed to start scanning"}`
+          );
+          nfcScanning = false;
+        }
+      }
+
+      // Stop NFC Scanning
+      function stopNFCScanning() {
+        nfcScanning = false;
+        updateDisplay(
+          "warning",
+          "Scanning Stopped",
+          "Ready to scan a new card"
+        );
+      }
+
+      // Handle NFC Reading
+      function handleNFCReading(event) {
+        const { serialNumber, records } = event.message;
+
+        let displayHTML = `
+                <div class="status-item">
+                    <span class="label">Status:</span>
+                    <span class="value success-message">✓ Card Detected</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Serial Number:</span>
+                    <span class="value">${serialNumber || "N/A"}</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Timestamp:</span>
+                    <span class="value"><span class="timestamp">${new Date().toLocaleTimeString()}</span></span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Records Found:</span>
+                    <span class="value">${records.length}</span>
+                </div>
+            `;
+
+        records.forEach((record, index) => {
+          const data = parseRecord(record);
+          displayHTML += `
+                    <div class="status-item" style="background: #f5f5f5; padding: 10px; margin-top: 10px; border-radius: 5px;">
+                        <span class="label">Record ${index + 1}:</span>
+                        <span class="value">${data}</span>
+                    </div>
+                `;
+        });
+
+        document.getElementById("statusDisplay").innerHTML = displayHTML;
+        document.getElementById("statusDisplay").classList.add("active");
+      }
+
+      // Parse NFC Record
+      function parseRecord(record) {
+        try {
+          if (record.recordType === "text") {
+            const decoder = new TextDecoder("utf-8");
+            const text = decoder.decode(record.data);
+            return `<strong>Text:</strong> ${text}`;
+          } else if (record.recordType === "url") {
+            const decoder = new TextDecoder("utf-8");
+            const url = decoder.decode(record.data);
+            return `<strong>URL:</strong> <a href="${url}" target="_blank">${url}</a>`;
+          } else if (record.recordType === "empty") {
+            return "<strong>Empty Record</strong>";
+          } else {
+            return `<strong>Type:</strong> ${record.recordType}`;
+          }
+        } catch (e) {
+          return "<strong>Data:</strong> [Binary Data]";
+        }
+      }
+
+      // Simulate NFC Type 2 Card
+      function simulateNFCType2() {
+        const simulatedData = `
+                <div class="status-item">
+                    <span class="label">Status:</span>
+                    <span class="value success-message">✓ Card Simulated (Type 2)</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Card Type:</span>
+                    <span class="value">Mifare Ultralight (Type 2)</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Serial Number:</span>
+                    <span class="value">04:A2:3B:C2:5B:80:80</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Capacity:</span>
+                    <span class="value">180 bytes</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Record 1:</span>
+                    <span class="value"><strong>Text:</strong> Hello NFC World</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Timestamp:</span>
+                    <span class="value"><span class="timestamp">${new Date().toLocaleTimeString()}</span></span>
+                </div>
+            `;
+        document.getElementById("statusDisplay").innerHTML = simulatedData;
+        document.getElementById("statusDisplay").classList.add("active");
+      }
+
+      // Simulate NFC Type 4 Card
+      function simulateNFCType4() {
+        const simulatedData = `
+                <div class="status-item">
+                    <span class="label">Status:</span>
+                    <span class="value success-message">✓ Card Simulated (Type 4)</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Card Type:</span>
+                    <span class="value">ISO-DEP (Type 4)</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Serial Number:</span>
+                    <span class="value">08:A1:2D:EE:F4:91:4A</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Capacity:</span>
+                    <span class="value">4 KB</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Record 1:</span>
+                    <span class="value"><strong>URL:</strong> https://example.com</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Record 2:</span>
+                    <span class="value"><strong>Text:</strong> Contact: John Doe</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Timestamp:</span>
+                    <span class="value"><span class="timestamp">${new Date().toLocaleTimeString()}</span></span>
+                </div>
+            `;
+        document.getElementById("statusDisplay").innerHTML = simulatedData;
+        document.getElementById("statusDisplay").classList.add("active");
+      }
+
+      // Simulate NFC Type 5 Card
+      function simulateNFCType5() {
+        const simulatedData = `
+                <div class="status-item">
+                    <span class="label">Status:</span>
+                    <span class="value success-message">✓ Card Simulated (Type 5)</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Card Type:</span>
+                    <span class="value">ISO15693 (Type 5)</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Serial Number:</span>
+                    <span class="value">E0:04:01:00:E1:C9:46</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Capacity:</span>
+                    <span class="value">8 KB</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Range:</span>
+                    <span class="value">Up to 1 meter</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Record 1:</span>
+                    <span class="value"><strong>Text:</strong> Premium Access Card</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Timestamp:</span>
+                    <span class="value"><span class="timestamp">${new Date().toLocaleTimeString()}</span></span>
+                </div>
+            `;
+        document.getElementById("statusDisplay").innerHTML = simulatedData;
+        document.getElementById("statusDisplay").classList.add("active");
+      }
+
+      // Simulate Empty Card
+      function simulateEmptyCard() {
+        const simulatedData = `
+                <div class="status-item">
+                    <span class="label">Status:</span>
+                    <span class="value warning-message">⚠ Empty Card Detected</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Card Type:</span>
+                    <span class="value">Generic NFC Card</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Serial Number:</span>
+                    <span class="value">3F:4B:A8:D2:7C:E5:91</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Records Found:</span>
+                    <span class="value">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Status Message:</span>
+                    <span class="value">No NDEF data found</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Timestamp:</span>
+                    <span class="value"><span class="timestamp">${new Date().toLocaleTimeString()}</span></span>
+                </div>
+            `;
+        document.getElementById("statusDisplay").innerHTML = simulatedData;
+        document.getElementById("statusDisplay").classList.add("active");
+      }
+
+      // Update Display Function
+      function updateDisplay(type, title, message) {
+        let messageClass = "";
+        if (type === "success") messageClass = "success-message";
+        else if (type === "error") messageClass = "error-message";
+        else if (type === "warning") messageClass = "warning-message";
+
+        const displayHTML = `
+                <div class="status-item">
+                    <span class="label">Status:</span>
+                    <span class="value ${messageClass}">${title}</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Message:</span>
+                    <span class="value">${message}</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Offline Mode:</span>
+                    <span class="value success-message">✓ Active</span>
+                </div>
+            `;
+
+        document.getElementById("statusDisplay").innerHTML = displayHTML;
+        if (type !== "warning") {
+          document.getElementById("statusDisplay").classList.add("active");
+        }
+      }
+
+      // Clear Display
+      function clearDisplay() {
+        document.getElementById("statusDisplay").innerHTML = `
+                <div class="status-item">
+                    <span class="label">Status:</span>
+                    <span class="value warning-message">Waiting for card...</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Ready:</span>
+                    <span class="value">✓ Yes</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Offline Mode:</span>
+                    <span class="value success-message">✓ Active</span>
+                </div>
+            `;
+        document.getElementById("statusDisplay").classList.remove("active");
+        nfcScanning = false;
+      }
+
+      // Initialize on page load
+      window.addEventListener("load", () => {
+        console.log("NFC Tester loaded - Offline mode active");
+      });
+    </script>
+  </body>
+</html>
