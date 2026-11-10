@@ -95,11 +95,6 @@
             padding: 20px;
             margin-bottom: 18px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-        }
-
-        .card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
         .card-header {
@@ -131,18 +126,19 @@
             border-radius: 6px;
             font-size: 0.9rem;
             text-decoration: none !important;
-            margin-top: 10px;
+            margin-top: 8px;
+            width: fit-content;
         }
 
         .btn-link:hover {
             background: var(--primary);
         }
 
-        .btn-drive {
+        .btn-green {
             background: #0f766e;
         }
 
-        .btn-drive:hover {
+        .btn-green:hover {
             background: #115e59;
         }
 
@@ -163,85 +159,108 @@
 
     <!-- AVIS DE NON-AFFILIATION GOUVERNEMENTALE (Obligation Google Play Store) -->
     <div class="disclaimer-box">
-        <div class="disclaimer-title">⚠️ AVIS DE NON-AFFILIATION GOUVERNEMENTALE (GOVERNMENT DISCLAIMER)</div>
+        <div class="disclaimer-title">⚠️ CLAUSE DE NON-RESPONSABILITÉ ET DE NON-AFFILIATION GOUVERNEMENTALE (GOVERNMENT DISCLAIMER)</div>
         <p>
-            <strong>L'application « ComptaMaroc PCGE » est une initiative éducative, technique et privée indépendante développée par l'équipe MoroccoDiy.</strong><br />
-            Elle ne représente en aucun cas le Ministère de l'Économie et des Finances du Royaume du Maroc, ni le Conseil National de la Comptabilité (CNC), ni la Trésorerie Générale du Royaume (TGR), ni aucune institution gouvernementale ou autorité publique.
+            <strong>L'application « ComptaMaroc PCGE » est un outil éducatif privé et indépendant développé par MoroccoDiy.</strong><br />
+            <strong>ELLE NE REPRÉSENTE AUCUNE ENTITÉ GOUVERNEMENTALE</strong>, ni le Gouvernement du Royaume du Maroc, ni le Ministère de l'Économie et des Finances, ni le Conseil National de la Comptabilité (CNC), ni l'Ordre des Experts-Comptables (OEC), ni aucune autorité publique.
         </p>
         <p>
-            Les informations comptables reproduites dans l'application ont un but strictement pédagogique et de vulgarisation technique du Plan Comptable Général des Entreprises (PCGE marocain). Elles sont issues des textes de loi et des documents publics de normalisation comptable cités ci-dessous.
+            Cette page répertorie de manière exhaustive <strong>toutes les sources d'information officielles et publiques</strong> utilisées dans l'application pour présenter la nomenclature des comptes (Classes 1 à 8) et les règles générales du Plan Comptable Général des Entreprises (PCGE / CGNC marocain).
         </p>
 
         <div class="arabic-box">
-            <strong>⚠️ بيان إخلاء المسؤولية الحكومية ومصادر البيانات المحاسبية :</strong><br />
-            تطبيق « <strong>ComptaMaroc PCGE</strong> » هو مبادرة تعليمية وبرمجية خاصة ومستقلة طورها فريق <strong>MoroccoDiy</strong>. هذا التطبيق <strong>لا يمثل وزارة الاقتصاد والمالية بالمملكة المغربية، ولا المجلس الوطني للمحاسبة (CNC)، ولا الخزينة العامة للمملكة (TGR)</strong>، ولا يرتبط بأي جهة حكومية أو رسمية. الغرض من التطبيق تعليمي بحت لمساعدة الطلبة والمهنيين على فهم ومراجعة المخطط المحاسبي المغربي وفق المراجع القانونية المفتوحة المدرجة أدناه.
+            <strong>⚠️ بيان إخلاء المسؤولية وعدم الانتماء الحكومي :</strong><br />
+            تطبيق « <strong>ComptaMaroc PCGE</strong> » هو أداة تعليمية خاصة ومستقلة طورها فريق <strong>MoroccoDiy</strong>. هذا التطبيق <strong>لا يمثل أي جهة حكومية</strong>، ولا يمثل حكومة المملكة المغربية أو وزارة الاقتصاد والمالية أو المجلس الوطني للمحاسبة. جميع المصادر القانونية والمحاسبية المعتمدة في التطبيق مدرجة بالكامل أدناه بروابط مباشرة وفعالة.
         </div>
     </div>
 
-    <h2>🏛️ 1. Textes Légaux & Publications Officielles</h2>
-    <p>Le Plan Comptable Général des Entreprises (PCGE) au Maroc est encadré par le cadre législatif officiel du Royaume du Maroc :</p>
+    <h2>🏛️ 1. Source Législative : Loi n° 9-88 relative aux obligations comptables des commerçants</h2>
+    <p>Le cadre légal de la comptabilité des entreprises au Maroc et les tableaux du Plan Comptable Général des Entreprises (Classes 1 à 8) sont institués par la <strong>Loi n° 9-88 relative aux obligations comptables des commerçants</strong>, promulguée par le <strong>Dahir n° 1-92-138 du 25 décembre 1992</strong> (publiée au <strong>Bulletin Officiel n° 4183 bis du 30 décembre 1992</strong>, modifiée par la Loi n° 44-03) :</p>
 
-    <!-- Carte SGG Portal -->
     <div class="card">
         <div class="card-header">
             <div>
-                <h3 style="margin:0 0 4px 0;">Portail Officiel du Secrétariat Général du Gouvernement (SGG)</h3>
-                <small style="color:var(--text-muted);">Royaume du Maroc — Bulletin Officiel & Législation</small>
+                <h3 style="margin:0 0 4px 0;">Texte Officiel de la Loi n° 9-88 (Portail CRI Rabat / ONU CNUCED eRegulations)</h3>
+                <small style="color:var(--text-muted);">Portail officiel d'information réglementaire — Accès international direct (Cloudflare)</small>
             </div>
-            <span class="badge">Portail d'État</span>
+            <span class="badge">Texte de Loi Officiel</span>
         </div>
-        <p>Le portail officiel du Secrétariat Général du Gouvernement assure la diffusion des Bulletins Officiels et des textes de lois promulgués au Royaume du Maroc, notamment la <strong>Loi n° 9-88 relative aux obligations comptables des commerçants</strong> (promulguée par le Dahir n° 1-92-138 — Bulletin Officiel n° 4187 bis) instituant le Code Général de Normalisation Comptable (CGNC / PCGE).</p>
-        <a class="btn-link" href="https://www.sgg.gov.ma" target="_blank" rel="noopener">
-            Accéder au portail officiel du SGG (sgg.gov.ma) ↗
-        </a>
+        <p>Texte intégral consolidé de la Loi n° 9-88 (Dahir n° 1-92-138 et Loi modificative n° 44-03) publié sur le portail officiel des procédures et textes réglementaires de Rabat (Centre Régional d'Investissement / Programme eRegulations des Nations Unies - CNUCED) :</p>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+            <a class="btn-link" href="https://rabat.eregulations.org/media/Maroc%20-%20Obligations%20comptables%20commercants.pdf" target="_blank" rel="noopener">
+                📄 Consulter la Loi n° 9-88 sur rabat.eregulations.org (PDF Officiel) ↗
+            </a>
+            <a class="btn-link btn-green" href="https://rabat.eregulations.org" target="_blank" rel="noopener">
+                🌐 Portail Officiel eRegulations Rabat (rabat.eregulations.org) ↗
+            </a>
+        </div>
     </div>
 
-    <h2>📂 2. Recueils Techniques & Archive Publique (Google Drive)</h2>
-    <p>Afin de garantir une accessibilité permanente et internationale (indépendamment d'éventuelles restrictions géographiques de pare-feu de certains serveurs ministériels), les documents techniques officiels du PCGE sont également consultables et téléchargeables sur notre archive publique :</p>
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <h3 style="margin:0 0 4px 0;">Bulletin Officiel du Royaume du Maroc n° 4183 bis du 30 décembre 1992</h3>
+                <small style="color:var(--text-muted);">Édition de Traduction Officielle (Pages 623 à 674) — Dahir n° 1-92-138, Loi n° 9-88 & Tableaux du PCGE</small>
+            </div>
+            <span class="badge">Bulletin Officiel Intégral</span>
+        </div>
+        <p>Édition officielle complète du Bulletin Officiel n° 4183 bis contenant la promulgation de la Loi n° 9-88 ainsi que les tableaux officiels annexés (Cadre comptable Modèle Normal et Modèle Simplifié des Classes 1 à 8 et États de synthèse) :</p>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+            <a class="btn-link" href="https://abourayan2019.github.io/mypolicy/bo_4183-bis_fr_Loi_9-88.pdf" target="_blank" rel="noopener">
+                📄 Télécharger le Bulletin Officiel n° 4183 bis (Loi 9-88 & Cadre Comptable PDF) ↗
+            </a>
+            <a class="btn-link btn-green" href="https://abourayan2019.github.io/mypolicy/Loi_9_88_obligations_comptables.pdf" target="_blank" rel="noopener">
+                📄 Télécharger l'extrait de la Loi n° 9-88 consolidée (PDF) ↗
+            </a>
+        </div>
+    </div>
 
-    <!-- Carte 2 : Archive & Téléchargement Direct -->
+    <h2>📘 2. Source Normative : Code Général de Normalisation Comptable (CGNC / PCGE)</h2>
+    <p>La nomenclature détaillée des comptes (numéros, intitulés et règles de fonctionnement Débit/Crédit des Classes 1 à 8) présentée dans l'application provient exclusivement du <strong>Code Général de Normalisation Comptable (CGNC — Tome 2 : Plan Comptable Général des Entreprises)</strong> :</p>
+
     <div class="card" style="border-left: 5px solid #0f766e;">
         <div class="card-header">
             <div>
-                <h3 style="margin:0 0 4px 0;">Répertoire & Consultation Directe des Documents Officiels</h3>
-                <small style="color:var(--text-muted);">Hébergement Sécurisé (CDN Mondial) — Accès libre 24/7</small>
+                <h3 style="margin:0 0 4px 0;">Code Général de Normalisation Comptable (CGNC Tome 2) & Liste des Comptes PCGE</h3>
+                <small style="color:var(--text-muted);">Conseil National de la Comptabilité (CNC) — Hébergement CDN Haute Disponibilité 24/7</small>
             </div>
             <span class="badge" style="background:#ccfbf1; color:#0f766e;">Documents Intégraux</span>
         </div>
-        <p>Ce répertoire public permet la consultation immédiate et le téléchargement direct des documents comptables officiels :</p>
-        <div style="display:flex; flex-direction:column; gap:8px; margin: 15px 0;">
-            <a class="btn-link" style="background:#1d4ed8; width:fit-content;" href="2264_code_comptable_tome2def.pdf" target="_blank">
-                📄 Télécharger le Code Comptable PCGE (Tome 2 - MEF) PDF ↗
+        <p>Accès direct et permanent aux recueils techniques officiels du Plan Comptable Général des Entreprises (PCGE) :</p>
+        <div style="display:flex; flex-direction:column; gap:8px; margin: 12px 0;">
+            <a class="btn-link" href="https://abourayan2019.github.io/mypolicy/2264_code_comptable_tome2def.pdf" target="_blank" rel="noopener">
+                📄 Télécharger le Code Général de Normalisation Comptable (CGNC Tome 2 Intégral PDF) ↗
             </a>
-            <a class="btn-link" style="background:#1d4ed8; width:fit-content;" href="640_recueilnormescomptables.pdf" target="_blank">
-                📄 Télécharger le Recueil des Normes Comptables (TGR / MEF) PDF ↗
-            </a>
-            <a class="btn-link" style="background:#1d4ed8; width:fit-content;" href="Avis_24_comptabilite_electronique.pdf" target="_blank">
-                📄 Télécharger l'Avis n° 24 comptabilité électronique (DEPP) PDF ↗
-            </a>
-            <a class="btn-link" style="background:#1d4ed8; width:fit-content;" href="Plan_Comptable_marocain.pdf" target="_blank">
-                📄 Télécharger le Plan Comptable Marocain (Synthèse) PDF ↗
+            <a class="btn-link btn-green" href="https://abourayan2019.github.io/mypolicy/Plan_Comptable_marocain.pdf" target="_blank" rel="noopener">
+                📄 Télécharger la Liste Synthétique des Comptes du PCGE (Classes 1 à 8 PDF) ↗
             </a>
         </div>
     </div>
 
-    <!-- Carte 4 : Ministère de l'Économie et des Finances -->
+    <h2>🌐 3. Portails Institutionnels Officiels de Référence au Maroc</h2>
+    <p>Portails officiels nationaux et professionnels de référence accessibles à l'international :</p>
+
     <div class="card">
         <div class="card-header">
             <div>
-                <h3 style="margin:0 0 4px 0;">Portail du Ministère de l'Économie et des Finances (MEF / CNC)</h3>
-                <small style="color:var(--text-muted);">Conseil National de la Comptabilité (CNC)</small>
+                <h3 style="margin:0 0 4px 0;">Ordre des Experts-Comptables du Royaume du Maroc (OEC) & Portail National (Maroc.ma)</h3>
+                <small style="color:var(--text-muted);">Institutions officielles de référence au Royaume du Maroc</small>
             </div>
-            <span class="badge">Source primaire</span>
+            <span class="badge">Portails Officiels (.ma)</span>
         </div>
-        <p>Portail institutionnel du Ministère de l'Économie et des Finances (Royaume du Maroc). <em>Note : Ce portail applique des politiques de filtrage d'adresses IP et peut être inaccessible depuis certains réseaux hors du Maroc.</em></p>
-        <a class="btn-link" href="https://www.finances.gov.ma/fr/Nos-metiers/Pages/cnc-normes.aspx" target="_blank" rel="noopener">
-            Consulter les Normes CNC sur finances.gov.ma ↗
-        </a>
+        <p>Portails officiels permettant de consulter les informations institutionnelles générales et professionnelles au Maroc :</p>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+            <a class="btn-link" href="https://www.oec.ma" target="_blank" rel="noopener">
+                🌐 Portail Officiel de l'Ordre des Experts-Comptables du Maroc (oec.ma) ↗
+            </a>
+            <a class="btn-link btn-green" href="https://www.maroc.ma/fr" target="_blank" rel="noopener">
+                🌐 Portail National Officiel du Royaume du Maroc (maroc.ma) ↗
+            </a>
+        </div>
     </div>
 
     <footer>
-        <p><strong>ComptaMaroc PCGE</strong> — Application développée par <strong>MoroccoDiy</strong>.</p>
+        <p><strong>ComptaMaroc PCGE</strong> — Application éducative indépendante développée par <strong>MoroccoDiy</strong>.</p>
         <p>
             <a href="comptamarocprivacy.html">Politique de Confidentialité</a> • 
             <a href="mailto:moroccodiy@gmail.com">Contact Support : moroccodiy@gmail.com</a>
